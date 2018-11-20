@@ -67,6 +67,50 @@ public class Coords
     {
         return "(" + x + "," + y + ")";
     }
+    public int compareTo(Coords other)
+    {
+        if (this.x == other.x)
+        {
+            if(this.y < other.y)
+                return -1;
+            if(this.y > other.y)
+                return 1;
+            return 0;
+        }
+        if (this.x < other.x)
+            return -1;
+
+        return 1;
+
+    }
+
+    public static void sortCoords(Coords[] points)
+    {
+        for(int i = 0; i < points.length-1;i++)
+        {
+            int lowPosition = i;
+            for (int j = i+1; j < points.length; j++)
+            {
+                if(points[j].compareTo(points[lowPosition]) < 0)
+                {
+                    lowPosition = j;
+                }
+            }
+            swap(i, lowPosition, points);
+        }
+    }
+    private static void swap(int indexOne, int indexTwo, Coords[] points)
+    {
+        Coords temp = points[indexOne];
+        points[indexOne] = points[indexTwo];
+        points[indexTwo] = temp;
+    }
+    public static void printArray(Coords[] points)
+    {
+        for(Coords c : points)
+            System.out.println(c + " ");
+    }
+
 
     //mutators
     public void setX(double x)
